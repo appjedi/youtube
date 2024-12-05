@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>My Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <h3><a href="catchme.zip">Download</a></h3>
+    <h1 id="divCount">Points: 0</h1>
+    <h1>Catch Me if you can!!!</h1>
+    <div>
+      <button id="startStop" onClick="game()">Start</button> Speed:
+      <input type="number" min="0" max="5000" id="speed" />
+    </div>
+    <div id="divButtons"></div>
+  </body>
+  <script>
+    let start = false
+    let speed = 200
+    const numButtons = 3
+    let count = 0
+    const speedField = document.getElementById('speed')
+    const divCount = document.getElementById('divCount')
+    const divButtons = document.getElementById('divButtons')
+    const catchMeButtons = []
+    const hidden = []
+
+    for (let i = 0; i < numButtons; i++) {
+      const b = document.createElement('button')
+      b.style.position = 'relative'
+      b.innerHTML = 'CM: ' + (i + 1)
+      b.style.display = 'none'
+
+      b.addEventListener('click', () => {
+        catchMe(i)
+      })
+      divButtons.append(b)
+      hidden.push(true)
+      catchMeButtons.push(b)
+      setInterval(() => {
+        if (start) {
+          hideButton(i)
+        }
+      }, speed + i * 10)
+    }
+    function game() {
+      start = !start
+      speed = parseInt(speedField.value)
+      console.log('speed:', speed)
+      startStop.innerHTML = start ? 'Stop' : 'Start'
+    }
+    function hideButton(idx) {
+      if (hidden[idx]) {
+        const left = Math.floor(Math.random() * 150)
+        const top = Math.floor(Math.random() * 200)
+        //console.log(left, top)
+        catchMeButtons[idx].style.left = left + 'px'
+        catchMeButtons[idx].style.top = top + 'px'
+
+        catchMeButtons[idx].style.display = 'block'
+      } else {
+        catchMeButtons[idx].style.display = 'none'
+      }
+      hidden[idx] = !hidden[idx]
+    }
+    function catchMe() {
+      if (!start) return
+
+      count++
+      divCount.innerHTML = 'Points: ' + count
+    }
+    const colors = ['red', 'blue', 'green', 'brown', 'purple', 'teal', 'pink']
+    setInterval(changeColor, 500)
+    function changeColor() {
+      if (!start) return
+      const i = Math.floor(Math.random() * 7)
+      document.body.style.backgroundColor = colors[i]
+    }
+  </script>
+</html>
