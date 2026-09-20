@@ -9,6 +9,7 @@ def get_conn():
         database="appjedin_student_temp"
     )
     return conn
+
 def get_customer(user_id):
 
     conn =get_conn()
