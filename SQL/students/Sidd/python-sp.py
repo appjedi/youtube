@@ -1,19 +1,21 @@
 import mysql.connector
 
 conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="your_password",
-    database="mydatabase"
-)
+        host="localhost",
+        user="root",
+        password="$Data2026",
+        database="appjedin_student_temp"
+    )
 
 cursor = conn.cursor()
-
-cursor.callproc("get_user", [123])
+username=input("Username:")
+password=input("Password:")
+cursor.callproc("usp_user_auth", [username,password])
 
 for result in cursor.stored_results():
-    for row in result.fetchall():
-        print(row)
-
+    # 3. Fetch one row
+    row = result.fetchone()
+    break
+print(row)
 cursor.close()
 conn.close()
