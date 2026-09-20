@@ -1,14 +1,17 @@
 import mysql.connector
 
 
-def get_customer(user_id):
+def get_conn():
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="$Data2026",
+        host="127.0.0.1",
+        user="devuser",
+        password="Test1234",
         database="appjedin_student_temp"
     )
+    return conn
+def get_customer(user_id):
 
+    conn =get_conn()
     cursor = conn.cursor(dictionary=True)
 
     try:
@@ -22,13 +25,10 @@ def get_customer(user_id):
     finally:
         cursor.close()
         conn.close()
+        
 def list_customers():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="$Data2026",
-        database="appjedin_student_temp"
-    )
+    conn =get_conn()
+
 
     cursor = conn.cursor(dictionary=True)
 
