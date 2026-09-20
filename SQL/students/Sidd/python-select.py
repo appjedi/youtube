@@ -30,7 +30,6 @@ def get_customer(user_id):
 def list_customers():
     conn =get_conn()
 
-
     cursor = conn.cursor(dictionary=True)
 
     try:
