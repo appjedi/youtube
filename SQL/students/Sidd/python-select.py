@@ -1,12 +1,11 @@
 import mysql.connector
 
-
 def get_conn():
     conn = mysql.connector.connect(
-        host="127.0.0.1",
-        user="devuser",
-        password="Test1234",
-        database="appjedin_student_temp"
+            host="localhost",
+            user="root",
+            password="Jedi2023",
+            database="appjedin_student_temp"
     )
     return conn
 
@@ -36,8 +35,8 @@ def list_customers():
         cursor.execute(
             "SELECT * FROM customer"           
         )
-
-        for row in cursor.fetchall():
+        rows=cursor.fetchall()
+        for row in rows:
             print(row)
     finally:
         cursor.close()

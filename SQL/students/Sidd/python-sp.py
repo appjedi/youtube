@@ -2,11 +2,11 @@ import mysql.connector
 
 def get_conn():
     conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="$Data2026",
-            database="appjedin_student_temp"
-        )
+        host="localhost",
+        user="root",
+        password="Jedi2023",
+        database="appjedin_student_temp"
+    )
     return conn
 
 def auth():
