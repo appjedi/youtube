@@ -1,5 +1,5 @@
 import mysql.connector
-
+# pip3 install mysql-connector-python
 def get_conn():
     conn = mysql.connector.connect(
             host="localhost",
@@ -42,5 +42,23 @@ def list_customers():
         cursor.close()
         conn.close()
 
+def auth():
+    conn = get_conn()
+    cursor = conn.cursor()
+    try:
+        username=input("Username:")
+        password=input("Password:")
+        cursor.callproc("usp_user_auth", [username,password])
+
+        for result in cursor.stored_results():
+            # 3. Fetch one row
+            row = result.fetchone()
+            break
+        print(row)
+    finally:
+        cursor.close()
+        conn.close()
+
+auth()
 #cid = input("Customer ID:")
-list_customers()
+#list_customers()
