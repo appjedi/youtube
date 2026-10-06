@@ -1,12 +1,20 @@
 import mysql.connector
+print(mysql.connector.__version__)
+print(mysql.connector.__file__)
 # pip3 install mysql-connector-python
 def get_conn():
+    import mysql.connector
+
     conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="Jedi2023",
-            database="appjedin_student_temp"
+        host="127.0.0.1",
+        port=3306,
+        user="devuser",
+        password="Test1234",
+        database="test",
+        ssl_disabled=True
     )
+
+    print("Connected!")
     return conn
 
 def get_customer(user_id):
@@ -59,6 +67,6 @@ def auth():
         cursor.close()
         conn.close()
 
-auth()
+#auth()
 #cid = input("Customer ID:")
-#list_customers()
+list_customers()
