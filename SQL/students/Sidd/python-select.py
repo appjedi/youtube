@@ -6,11 +6,11 @@ def get_conn():
     import mysql.connector
 
     conn = mysql.connector.connect(
-        host="127.0.0.1",
+        host="172.25.80.129",
         port=3306,
         user="devuser",
         password="Test1234",
-        database="test",
+        database="acabinet_stage",
         ssl_disabled=True
     )
 
@@ -41,7 +41,7 @@ def list_customers():
 
     try:
         cursor.execute(
-            "SELECT * FROM customer"           
+            "SELECT * FROM catalog_master"           
         )
         rows=cursor.fetchall()
         for row in rows:
