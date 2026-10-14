@@ -1,0 +1,102 @@
+SELECT
+    salesperson,
+    sale_date,
+    amount,
+    SUM(amount) OVER (
+        PARTITION BY salesperson
+    ) AS salesperson_total
+FROM sales;
+
+
+SUM(amount) OVER (
+    PARTITION BY salesperson
+)
+
+
+SELECT
+    salesperson,
+    amount,
+    ROW_NUMBER() OVER (
+        ORDER BY amount DESC
+    ) AS row_num
+FROM sales;
+
+
+RANK() vs. DENSE_RANK()
+SELECT
+    category_id,
+    product_name,
+    sales,
+    RANK() OVER (
+        PARTITION BY category_id
+        ORDER BY sales DESC
+    ) AS category_rank
+FROM product_sales;
+
+SELECT
+    sale_date,
+    amount,
+    SUM(amount) OVER (
+        ORDER BY sale_date
+    ) AS running_total
+FROM sales;
+
+SELECT
+    customer_id,
+    order_date,
+    amount,
+    SUM(amount) OVER (
+        PARTITION BY customer_id
+        ORDER BY order_date
+    ) AS customer_running_total
+FROM orders;
+
+SELECT
+    sale_date,
+    amount,
+    LAG(amount) OVER (
+        ORDER BY sale_date
+    ) AS previous_amount
+FROM sales;
+
+SELECT
+    sale_date,
+    amount,
+    amount - LAG(amount) OVER (
+        ORDER BY sale_date
+    ) AS change
+FROM sales;
+
+LEAD(amount) OVER (
+    ORDER BY sale_date
+)
+
+SELECT
+    sale_date,
+    amount,
+    AVG(amount) OVER (
+        ORDER BY sale_date
+        ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+    ) AS moving_average
+FROM sales;
+
+
+Window frames:
+ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
+
+SELECT
+    product,
+    sales,
+    sales / SUM(sales) OVER () * 100 AS percent_of_total
+FROM product_sales;
+
+SELECT
+    employee,
+    department,
+    sales,
+    AVG(sales) OVER (
+        PARTITION BY department
+    ) AS department_average
+FROM employee_sales;
+
