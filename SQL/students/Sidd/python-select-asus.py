@@ -65,6 +65,26 @@ def auth():
         cursor.close()
         conn.close()
 
+def show_menu():
+    print("\n=== Main Menu ===")
+    print("1. Show Cities")
+    print("2. Add User")
+    print("3. Exit")
+
+def main():
+    while True:
+        show_menu()
+        choice = input("Enter your choice (1-3): ")
+
+        if choice == "1":
+            show_users()
+        elif choice == "2":
+            add_user()
+        elif choice == "3":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice, please try again.")
 auth()
 #cid = input("Customer ID:")
 #list_customers()
