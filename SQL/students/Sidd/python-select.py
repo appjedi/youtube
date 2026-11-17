@@ -4,12 +4,10 @@ import mysql.connector
 # pip3 install mysql-connector-python
 def get_conn():
     conn = mysql.connector.connect(
-        host="172.25.80.129",
-        port=3306,
-        user="devuser",
-        password="Test1234",
-        database="student_temp",
-        ssl_disabled=True
+        host="localhost",
+        user="root",
+        password="Jedi2023",
+        database="appjedin_student_temp"
     )
 
     print("Connected!")
